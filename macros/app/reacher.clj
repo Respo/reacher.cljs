@@ -27,13 +27,19 @@
                     image line marker mask path pattern polygon polyline rect stop
                     text tspan view])
 
+(defn create-normal-element [tag props children]
+  `(React/createElement ~(get-tag-name tag) (cljs.core/clj->js ~props) ~@children))
+
 (defn normal-tag [el]
   `(defmacro ~el [~'props ~'& ~'children]
-    `(React/createElement ~(get-tag-name '~el) (cljs.core/clj->js ~~'props) ~@~'children)))
+    (create-normal-element '~el ~'props ~'children)))
+
+(defn create-close-element [tag props]
+  `(React/createElement ~(get-tag-name tag) (cljs.core/clj->js ~props)))
 
 (defn self-close-tag [el]
   `(defmacro ~el [~'props]
-    `(React/createElement ~(get-tag-name '~el) (cljs.core/clj->js ~~'props))))
+    (create-close-element '~el ~'props)))
 
 (defmacro gen-normal-elements []
   `(do ~@(clojure.core/map normal-tag normal-elements)))

@@ -14,7 +14,7 @@
                               :http-root "target"
                               :http-port 7000
                               :loader-mode :eval}
-                   :compiler-options {:infer-externs :auto}
+                   :compiler-options {:infer-externs false}
                    :release {:output-dir "dist/"
                              :module-hash-names 8
                              :build-options {:manifest-name "assets.edn"}}}

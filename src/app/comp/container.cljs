@@ -4,7 +4,16 @@
             [app.config :refer [dev?]]
             ["react" :as React]
             ["react-dom" :as ReactDOM]
-            [app.reacher :refer [div input]]))
+            [app.reacher :refer [create-comp div input span]]))
+
+(def comp-draft-area
+  (create-comp
+   "draft 0"
+   (fn [state mutate!]
+     (div
+      {}
+      (input {:value state, :onChange (fn [event] (mutate! (.. event -target -value)))})
+      (span {} state)))))
 
 (def comp-input-area
   (let [Child (fn [props context updater]
@@ -34,4 +43,5 @@
    {:style {:color (hsl 200 90 60)}}
    (div {} "A todolist")
    (div {} "DEMO")
-   (React/createElement comp-input-area)))
+   (React/createElement comp-input-area)
+   (React/createElement comp-draft-area)))

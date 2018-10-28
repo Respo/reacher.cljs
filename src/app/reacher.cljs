@@ -1,5 +1,7 @@
 
-(ns app.reacher (:require ["react" :as React]))
+(ns app.reacher
+  (:require ["react" :as React] ["react-dom" :as DOM])
+  (:require-macros [app.reacher :refer [div]]))
 
 (defn create-comp [state renderer]
   (let [Child (fn [props context updater]
@@ -27,11 +29,3 @@
          (aget (.-state this) "$0")
          (fn [result] (.setState this (js-obj "$0" result)))))))
     (fn [& args] (React/createElement Child (js-obj "$0" args)))))
-
-(defn div [props & children]
-  (let [f (partial React/createElement "div" (clj->js props))] (apply f children)))
-
-(defn input [props] (React/createElement "input" (clj->js props)))
-
-(defn span [props & children]
-  (let [f (partial React/createElement "span" (clj->js props))] (apply f children)))

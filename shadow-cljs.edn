@@ -1,5 +1,5 @@
 
-{:source-paths ["src" "cli"]
+{:source-paths ["macros" "src" "cli"]
  :dependencies [[mvc-works/hsl          "0.1.2"]
                 [org.clojure/core.incubator "0.1.4"]]
  :repositories {"central" {:url "https://maven.aliyun.com/nexus/content/groups/public/"}

@@ -4,7 +4,8 @@
             [app.config :refer [dev?]]
             ["react" :as React]
             ["react-dom" :as ReactDOM]
-            [app.reacher :refer [create-comp div input span]]))
+            [app.reacher :refer [create-comp]]
+            [app.reacher :refer [div input span]]))
 
 (def comp-draft-area
   (create-comp

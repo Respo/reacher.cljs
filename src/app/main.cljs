@@ -5,7 +5,8 @@
             [cljs.reader :refer [read-string]]
             [app.config :as config]
             ["react" :as React]
-            ["react-dom" :as ReactDOM]))
+            ["react-dom" :as ReactDOM]
+            [app.comp.container :refer [comp-container]]))
 
 (def *store (atom {}))
 
@@ -16,11 +17,7 @@
 (defn persist-storage! []
   (.setItem js/localStorage (:storage config/site) (pr-str @*store)))
 
-(defn render-app! []
-  (ReactDOM/render
-   (React/createElement
-    (fn [] (React/createElement "div" (clj->js {:className "demo"}) "String demo2")))
-   mount-target))
+(defn render-app! [] (ReactDOM/render (React/createElement comp-container) mount-target))
 
 (def ssr? (some? (js/document.querySelector "meta.respo-ssr")))
 
@@ -35,5 +32,3 @@
   (println "App started."))
 
 (defn reload! [] (println "Code updated.") (render-app!))
-
-(set! (.-onload js/window) main!)

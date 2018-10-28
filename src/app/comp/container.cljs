@@ -34,10 +34,10 @@
         (div
          {}
          (input
-          {:value (^js .-draft (^js .-state this)),
+          {:value (.-draft (.-state ^js this)),
            :onChange (fn [event]
              (.setState this (clj->js {:draft (.. event -target -value)})))})
-         (^js .-draft (^js .-state this))))))
+         (.-draft (.-state ^js this))))))
     Child))
 
 (defn comp-container [store]

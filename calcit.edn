@@ -505,13 +505,12 @@
                        "j" {
                         :type :expr, :by "root", :at 1540718485254, :id "uAECzKuajx"
                         :data {
-                         "D" {:type :leaf, :by "root", :at 1540719757382, :text "^js", :id "MTvMVfCFys"}
                          "T" {:type :leaf, :by "root", :at 1540718816413, :text ".-draft", :id "JwxfM_1xr"}
                          "j" {
                           :type :expr, :by "root", :at 1540718430912, :id "Nu0guJutao"
                           :data {
-                           "D" {:type :leaf, :by "root", :at 1540719706577, :text "^js", :id "jxpfuDqOqJ"}
                            "T" {:type :leaf, :by "root", :at 1540718432687, :text ".-state", :id "Wda9Av2Kv"}
+                           "b" {:type :leaf, :by "root", :at 1540727869568, :text "^js", :id "ALOgDRV0Y"}
                            "j" {:type :leaf, :by "root", :at 1540718435870, :text "this", :id "HAFNRbAbm"}
                           }
                          }
@@ -578,13 +577,12 @@
                  "v" {
                   :type :expr, :by "root", :at 1540718533693, :id "LTYr5zhnxt"
                   :data {
-                   "L" {:type :leaf, :by "root", :at 1540719754862, :text "^js", :id "0FFAAwyDt"}
                    "j" {:type :leaf, :by "root", :at 1540718533693, :text ".-draft", :id "jMmG4T47Cn"}
                    "r" {
                     :type :expr, :by "root", :at 1540718533693, :id "mMXlsjlgC6"
                     :data {
-                     "D" {:type :leaf, :by "root", :at 1540719746634, :text "^js", :id "5Bp9VPIw6c"}
                      "T" {:type :leaf, :by "root", :at 1540718533693, :text ".-state", :id "GEp00PSkoF"}
+                     "b" {:type :leaf, :by "root", :at 1540727865277, :text "^js", :id "tHQHttZp2F"}
                      "j" {:type :leaf, :by "root", :at 1540718533693, :text "this", :id "cEF0ZpRv1Y"}
                     }
                    }
@@ -1827,6 +1825,7 @@
             :type :expr, :by "root", :at 1540724286218, :id "T0TKr3Rrsu"
             :data {
              "T" {:type :leaf, :by "root", :at 1540724286218, :text "..", :id "aB6LGMzx0_"}
+             "b" {:type :leaf, :by "root", :at 1540727887960, :text "^js", :id "qTtBj-H9S9"}
              "j" {:type :leaf, :by "root", :at 1540724286218, :text "Child", :id "Y1-UsqYzYP"}
              "r" {:type :leaf, :by "root", :at 1540724286218, :text "-prototype", :id "hi79DTaa3u"}
              "v" {:type :leaf, :by "root", :at 1540724295311, :text "-shouldComponentUpdate", :id "XitkItVw6a"}
@@ -1967,7 +1966,6 @@
                    "T" {
                     :type :expr, :by "root", :at 1540723342340, :id "o2LMw59N37"
                     :data {
-                     "T" {:type :leaf, :by "root", :at 1540723342340, :text "^js", :id "x6_0NsdDhf"}
                      "j" {:type :leaf, :by "root", :at 1540723342340, :text ".-state", :id "d-5-xDVqW7"}
                      "r" {:type :leaf, :by "root", :at 1540723342340, :text "this", :id "gCYUCqq0ZK"}
                     }

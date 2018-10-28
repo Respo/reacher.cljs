@@ -11,7 +11,7 @@
     (set! (.-prototype Child) (.create js/Object (.-prototype React/Component)))
     (set! (.. Child -prototype -constructor) React/Component)
     (set!
-     (.. Child -prototype -shouldComponentUpdate)
+     (.. ^js Child -prototype -shouldComponentUpdate)
      (fn [prevProps prevState]
        (this-as
         this
@@ -24,7 +24,7 @@
         this
         (renderer
          (aget (.-props this) "$0")
-         (aget (^js .-state this) "$0")
+         (aget (.-state this) "$0")
          (fn [result] (.setState this (js-obj "$0" result)))))))
     (fn [& args] (React/createElement Child (js-obj "$0" args)))))
 

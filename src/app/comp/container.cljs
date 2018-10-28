@@ -18,27 +18,13 @@
       (span {} (str p2))))))
 
 (def comp-input-area
-  (let [Child (fn [props context updater]
-                (this-as
-                 this
-                 (.call React/Component this props context updater)
-                 (set! (.-state this) (clj->js {:draft "initial thing"}))
-                 this))]
-    (set! (.-prototype Child) (.create js/Object (.-prototype React/Component)))
-    (set! (.. Child -prototype -constructor) React/Component)
-    (set!
-     (.. Child -prototype -render)
-     (fn []
-       (this-as
-        this
-        (div
-         {}
-         (input
-          {:value (.-draft (.-state ^js this)),
-           :onChange (fn [event]
-             (.setState this (clj->js {:draft (.. event -target -value)})))})
-         (.-draft (.-state ^js this))))))
-    Child))
+  (create-comp
+   "initial thingg"
+   (fn [_ state mutate!]
+     (div
+      {}
+      (input {:value state, :onChange (fn [event] (mutate! (.. event -target -value)))})
+      (str state)))))
 
 (defn comp-container [store]
   (div

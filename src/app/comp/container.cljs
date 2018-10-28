@@ -9,11 +9,13 @@
 (def comp-draft-area
   (create-comp
    "draft 0"
-   (fn [state mutate!]
+   (fn [[p1 p2] state mutate!]
      (div
       {}
       (input {:value state, :onChange (fn [event] (mutate! (.. event -target -value)))})
-      (span {} state)))))
+      (span {} state)
+      (span {} (str p1))
+      (span {} (str p2))))))
 
 (def comp-input-area
   (let [Child (fn [props context updater]
@@ -44,4 +46,4 @@
    (div {} "A todolist")
    (div {} "DEMO")
    (React/createElement comp-input-area)
-   (React/createElement comp-draft-area)))
+   (comp-draft-area :value 1)))

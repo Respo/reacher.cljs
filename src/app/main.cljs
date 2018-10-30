@@ -6,11 +6,12 @@
             [app.config :as config]
             ["react" :as React]
             ["react-dom" :as ReactDOM]
-            [app.comp.container :refer [comp-container]]))
+            [app.comp.container :refer [comp-container]]
+            [app.reacher :refer [register-dispatcher!]]))
 
 (def *store (atom {}))
 
-(defn dispatch! [op op-data] (comment println "Dispatch:" op))
+(defn dispatch! [op op-data] (println "Dispatch:" op op-data))
 
 (def mount-target (.querySelector js/document ".app"))
 
@@ -23,6 +24,7 @@
 
 (defn main! []
   (if ssr? (do nil))
+  (register-dispatcher! #(dispatch! %1 %2))
   (render-app!)
   (add-watch *store :changes (fn [] (render-app!)))
   (.addEventListener js/window "beforeunload" persist-storage!)

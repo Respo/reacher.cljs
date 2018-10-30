@@ -5,12 +5,12 @@
             ["react" :as React]
             ["react-dom" :as ReactDOM]
             [app.reacher :refer [create-comp]]
-            [app.reacher :refer [div input span]]))
+            [app.reacher :refer [div input span button]]))
 
 (def comp-draft-area
   (create-comp
    "draft 0"
-   (fn [[p1 p2] state mutate!]
+   (fn [[p1 p2] state dispatch! mutate!]
      (div
       {}
       (input {:value state, :onChange (fn [event] (mutate! (.. event -target -value)))})
@@ -21,11 +21,12 @@
 (def comp-input-area
   (create-comp
    "initial thingg"
-   (fn [_ state mutate!]
+   (fn [_ state dispatch! mutate!]
      (div
       {}
       (input {:value state, :onChange (fn [event] (mutate! (.. event -target -value)))})
-      (str state)))))
+      (str state)
+      (button {:onClick (fn [event] (dispatch! :action "data"))} "Click")))))
 
 (defn comp-container [store]
   (div

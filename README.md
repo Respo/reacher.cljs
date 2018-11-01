@@ -1,8 +1,8 @@
 
-Calcit React Workflow(Still working on it)
+Reacher(Still working on it)
 ----
 
-> Personal project template based on ClojureScript, React, shadow-cljs, Cirru.
+> React wrapper in ClojureScript
 
 Might be useful
 

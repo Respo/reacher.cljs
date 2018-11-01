@@ -1,5 +1,5 @@
 
-(ns app.reacher)
+(ns reacher.core)
 
 (defn get-tag-name [tag]
   (cond

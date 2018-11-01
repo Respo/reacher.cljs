@@ -1,14 +1,14 @@
 
-(ns app.page
-  (:require [app.schema :as schema]
+(ns reacher.example.page
+  (:require [reacher.example.schema :as schema]
             [cljs.reader :refer [read-string]]
-            [app.config :as config]
-            [app.util :refer [get-env!]]
+            [reacher.example.config :as config]
+            [reacher.example.util :refer [get-env!]]
             [build.util :refer [get-ip!]]
             ["react-dom/server" :refer [renderToString]]
             ["react" :as React]
             ["fs" :as fs]
-            [app.reacher :refer [div html head body link style script title meta']])
+            [reacher.core :refer [div html head body link style script title meta']])
   (:require-macros [clojure.core.strint :refer [<<]]))
 
 (def base-info

@@ -1,5 +1,5 @@
 
-(ns app.snippet )
+(ns reacher.example.snippet )
 
 (defn main! []
   (require '[clojure.string :as string])

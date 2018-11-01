@@ -1,7 +1,7 @@
 
-(ns app.reacher
+(ns reacher.core
   (:require ["react" :as React] ["react-dom" :as DOM])
-  (:require-macros [app.reacher :refer [div]]))
+  (:require-macros [reacher.core :refer [div]]))
 
 (defn grab-dispatcher! [] (.-dispatcherFunction React))
 

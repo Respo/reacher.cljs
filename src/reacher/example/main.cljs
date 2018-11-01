@@ -1,13 +1,13 @@
 
-(ns app.main
-  (:require [app.updater :refer [updater]]
-            [app.schema :as schema]
+(ns reacher.example.main
+  (:require [reacher.example.updater :refer [updater]]
+            [reacher.example.schema :as schema]
             [cljs.reader :refer [read-string]]
-            [app.config :as config]
+            [reacher.example.config :as config]
             ["react" :as React]
             ["react-dom" :as ReactDOM]
-            [app.comp.container :refer [comp-container]]
-            [app.reacher :refer [register-dispatcher!]]))
+            [reacher.example.comp.container :refer [comp-container]]
+            [reacher.core :refer [register-dispatcher!]]))
 
 (def *store (atom {}))
 

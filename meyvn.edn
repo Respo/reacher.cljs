@@ -1,8 +1,8 @@
 
-{:pom {:group-id "mvc-works",
-       :artifact-id "calcit-workflow",
+{:pom {:group-id "respo",
+       :artifact-id "reacher",
        :version "0.1.0",
-       :name "Workflow"}
+       :name "Very simple React.js binding in ClojureScript"}
  :packaging {:jar {:enabled true
                    :remote-repository {:id "clojars"
                                        :url "https://clojars.org/repo"}}}

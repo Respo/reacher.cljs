@@ -1,11 +1,10 @@
 
-(ns app.comp.container
+(ns reacher.example.comp.container
   (:require [hsl.core :refer [hsl]]
-            [app.config :refer [dev?]]
+            [reacher.example.config :refer [dev?]]
             ["react" :as React]
             ["react-dom" :as ReactDOM]
-            [app.reacher :refer [create-comp]]
-            [app.reacher :refer [div input span button]]))
+            [reacher.core :refer [create-comp div input span button]]))
 
 (def comp-draft-area
   (create-comp

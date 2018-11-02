@@ -6,7 +6,8 @@
             ["react-dom" :as ReactDOM]
             [reacher.core :refer [create-comp div input span button]]
             [respo-ui.core :as ui]
-            [reacher.core :refer [adorn]]))
+            [reacher.core :refer [adorn]]
+            [reacher.built-in :refer [comp-space]]))
 
 (def comp-draft-area
   (create-comp
@@ -14,7 +15,11 @@
    (fn [[p1 p2] state dispatch! mutate!]
      (div
       {}
-      (input {:value state, :onChange (fn [event] (mutate! (.. event -target -value)))})
+      (input
+       {:value state,
+        :style (adorn ui/input),
+        :onChange (fn [event] (mutate! (.. event -target -value)))})
+      (comp-space 8 nil)
       (span {} state)
       (span {} (str p1))
       (span {} (str p2))))))
@@ -25,7 +30,11 @@
    (fn [_ state dispatch! mutate!]
      (div
       {}
-      (input {:value state, :onChange (fn [event] (mutate! (.. event -target -value)))})
+      (input
+       {:value state,
+        :style (adorn ui/input),
+        :onChange (fn [event] (mutate! (.. event -target -value)))})
+      (comp-space 8 nil)
       (str state)
       (button {:onClick (fn [event] (dispatch! :action "data"))} "Click")))))
 

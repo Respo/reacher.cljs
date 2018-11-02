@@ -50,4 +50,7 @@
          (fn [result] (.setState this (js-obj "$0" result)))))))
     (fn [& args] (React/createElement Child (js-obj "$0" args)))))
 
+(defn react-create-element [el props & children]
+  (apply (partial React/createElement el props) children ))
+
 (defn register-dispatcher! [f] (set! (.-dispatcherFunction React) f))

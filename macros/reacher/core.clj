@@ -10,11 +10,11 @@
 
 (defmacro <> [tag props & children]
   (let [tag-name (get-tag-name tag)]
-    `(React/createElement ~tag-name (cljs.core/clj->js ~props) ~@children)))
+    `(react-create-element ~tag-name (cljs.core/clj->js ~props) ~@children)))
 
 (defmacro <*> [tag props]
   (let [tag-name (get-tag-name tag)]
-    `(React/createElement ~tag-name (cljs.core/clj->js ~props))))
+    `(react-create-element ~tag-name (cljs.core/clj->js ~props))))
 
 (def normal-elements '[a body button canvas code div footer
                        h1 h2 head header html hr i img li
@@ -28,14 +28,14 @@
                     text tspan view])
 
 (defn create-normal-element [tag props children]
-  `(React/createElement ~(get-tag-name tag) (cljs.core/clj->js ~props) ~@children))
+  `(react-create-element ~(get-tag-name tag) (cljs.core/clj->js ~props) ~@children))
 
 (defn normal-tag [el]
   `(defmacro ~el [~'props ~'& ~'children]
     (create-normal-element '~el ~'props ~'children)))
 
 (defn create-close-element [tag props]
-  `(React/createElement ~(get-tag-name tag) (cljs.core/clj->js ~props)))
+  `(react-create-element ~(get-tag-name tag) (cljs.core/clj->js ~props)))
 
 (defn self-close-tag [el]
   `(defmacro ~el [~'props]
@@ -55,4 +55,4 @@
 (gen-self-close-elements)
 
 (defmacro meta' [props & children]
-  `(React/createElement "meta" (cljs.core/clj->js ~props) ~@children))
+  `(react-create-element "meta" (cljs.core/clj->js ~props) ~@children))

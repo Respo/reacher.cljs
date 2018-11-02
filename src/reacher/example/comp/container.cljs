@@ -4,7 +4,9 @@
             [reacher.example.config :refer [dev?]]
             ["react" :as React]
             ["react-dom" :as ReactDOM]
-            [reacher.core :refer [create-comp div input span button]]))
+            [reacher.core :refer [create-comp div input span button]]
+            [respo-ui.core :as ui]
+            [reacher.core :refer [adorn]]))
 
 (def comp-draft-area
   (create-comp
@@ -29,8 +31,8 @@
 
 (defn comp-container [store]
   (div
-   {:style {:color (hsl 200 90 60)}}
+   {:style (adorn ui/global {:color (hsl 200 90 60)})}
    (div {} "A todolist")
    (div {} "DEMO")
-   (React/createElement comp-input-area)
+   (comp-input-area)
    (comp-draft-area :value 1)))

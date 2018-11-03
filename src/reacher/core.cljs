@@ -19,12 +19,22 @@
 (defn adorn [& styles]
   (->> (apply merge styles) (map (fn [[k v]] [(dashed->camel (name k)) v])) (into {})))
 
+(defn unit-get [x] (aget x "$0"))
+
+(defn get-props [this] (unit-get (.-props this)))
+
+(defn get-state [this] (unit-get (.-state this)))
+
+(defn unit-obj [data] (js-obj "$0" data))
+
+(defn set-state! [this data] (.setState this (unit-obj data)))
+
 (defn create-comp [state renderer]
   (let [Child (fn [props context updater]
                 (this-as
                  this
                  (.call React/Component this props context updater)
-                 (set! (.-state this) (js-obj "$0" state))
+                 (set! (.-state this) (unit-obj state))
                  this))]
     (set! (.-prototype Child) (.create js/Object (.-prototype React/Component)))
     (set! (.. Child -prototype -constructor) React/Component)
@@ -33,18 +43,15 @@
      (fn [prevProps prevState]
        (this-as
         this
-        (or (not= (aget prevProps "$0") (aget (.-props this) "$0"))
-            (not= (aget prevState "$0") (aget (.-state this) "$0"))))))
+        (or (not= (unit-get prevProps) (get-props this))
+            (not= (unit-get prevState) (get-state this))))))
     (set!
      (.. Child -prototype -render)
      (fn []
        (this-as
         this
-        (renderer
-         (aget (.-props this) "$0")
-         (aget (.-state this) "$0")
-         (fn [result] (.setState this (js-obj "$0" result)))))))
-    (fn [& args] (React/createElement Child (js-obj "$0" args)))))
+        (renderer (get-props this) (get-state this) (fn [result] (set-state! this result))))))
+    (fn [& args] (React/createElement Child (unit-obj args)))))
 
 (defn dispatch! [op op-data] ((.-dispatcherFunction React) op op-data))
 

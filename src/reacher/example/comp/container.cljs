@@ -42,10 +42,21 @@
       (str state)
       (button {:onClick (fn [event] (dispatch! :action "data"))} "Click")))))
 
+(defn comp-input-hooked [a b c]
+  (let [[text set-text] (js->clj (React/useState "0"))]
+    (div
+     {}
+     (input
+      {:value text,
+       :style (adorn ui/input),
+       :onChange (fn [event] (set-text (.. event -target -value)))})
+     (span {} text))))
+
 (defn comp-container [store]
   (div
    {:style (adorn ui/global {:color (hsl 200 90 60)})}
    (div {} "A todolist")
    (div {} "DEMO")
    (comp-input-area)
-   (comp-draft-area :value 1)))
+   (comp-draft-area :value 1)
+   (comp-input-hooked 1 2 3)))

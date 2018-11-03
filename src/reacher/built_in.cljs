@@ -3,7 +3,7 @@
 
 (def comp-space
   (create-comp
-   nil
+   {:name :comp-space}
    (fn [[w h] state d! m!]
      (if (some? w)
        (div {:style (adorn {:display :inline-block, :width w})})

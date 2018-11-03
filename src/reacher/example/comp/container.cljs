@@ -4,13 +4,15 @@
             [reacher.example.config :refer [dev?]]
             ["react" :as React]
             ["react-dom" :as ReactDOM]
-            [reacher.core :refer [create-comp div input span button adorn dispatch!]]
+            [reacher.core
+             :refer
+             [create-comp div input span button adorn dispatch! get-state]]
             [respo-ui.core :as ui]
             [reacher.built-in :refer [comp-space]]))
 
 (def comp-draft-area
   (create-comp
-   "draft 0"
+   {:state "draft 0", :name :draft-area}
    (fn [[p1 p2] state mutate!]
      (div
       {}
@@ -25,7 +27,10 @@
 
 (def comp-input-area
   (create-comp
-   "initial thingg"
+   {:state "initial thingg",
+    :name :demo-area,
+    :mount (fn [] (this-as this (println "Mounted with state" (pr-str (get-state this))))),
+    :unmount (fn [] (println "Tearing down"))}
    (fn [_ state mutate!]
      (div
       {}

@@ -29,28 +29,33 @@
 
 (defn set-state! [this data] (.setState this (unit-obj data)))
 
-(defn create-comp [state renderer]
+(defn create-comp [options renderer]
   (let [Child (fn [props context updater]
                 (this-as
                  this
                  (.call React/Component this props context updater)
-                 (set! (.-state this) (unit-obj state))
+                 (set! (.-state this) (unit-obj (:state options)))
                  this))]
     (set! (.-prototype Child) (.create js/Object (.-prototype React/Component)))
     (set! (.. Child -prototype -constructor) React/Component)
     (set!
      (.. ^js Child -prototype -shouldComponentUpdate)
-     (fn [prevProps prevState]
-       (this-as
-        this
-        (or (not= (unit-get prevProps) (get-props this))
-            (not= (unit-get prevState) (get-state this))))))
+     (or (:should-update options)
+         (fn [prevProps prevState]
+           (this-as
+            this
+            (or (not= (unit-get prevProps) (get-props this))
+                (not= (unit-get prevState) (get-state this)))))))
     (set!
      (.. Child -prototype -render)
      (fn []
        (this-as
         this
         (renderer (get-props this) (get-state this) (fn [result] (set-state! this result))))))
+    (set! (.. ^js Child -prototype -componentDidMount) (:mount options))
+    (set! (.. ^js Child -prototype -componentDidUpdate) (:update options))
+    (set! (.. ^js Child -prototype -componentWillUnmount) (:unmount options))
+    (set! (.. ^js Child -displayName) (str (:name options)))
     (fn [& args] (React/createElement Child (unit-obj args)))))
 
 (defn dispatch! [op op-data] ((.-dispatcherFunction React) op op-data))

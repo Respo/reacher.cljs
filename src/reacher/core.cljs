@@ -19,16 +19,13 @@
 (defn adorn [& styles]
   (->> (apply merge styles) (map (fn [[k v]] [(dashed->camel (name k)) v])) (into {})))
 
-(defn grab-dispatcher! [] (.-dispatcherFunction React))
-
 (defn create-comp [state renderer]
   (let [Child (fn [props context updater]
                 (this-as
                  this
                  (.call React/Component this props context updater)
                  (set! (.-state this) (js-obj "$0" state))
-                 this))
-        dispatch! (fn [op op-data] ((grab-dispatcher!) op op-data))]
+                 this))]
     (set! (.-prototype Child) (.create js/Object (.-prototype React/Component)))
     (set! (.. Child -prototype -constructor) React/Component)
     (set!
@@ -46,9 +43,10 @@
         (renderer
          (aget (.-props this) "$0")
          (aget (.-state this) "$0")
-         dispatch!
          (fn [result] (.setState this (js-obj "$0" result)))))))
     (fn [& args] (React/createElement Child (js-obj "$0" args)))))
+
+(defn dispatch! [op op-data] ((.-dispatcherFunction React) op op-data))
 
 (defn react-create-element [el props & children]
   (apply (partial React/createElement el props) children ))

@@ -6,57 +6,28 @@
             ["react-dom" :as ReactDOM]
             [reacher.core
              :refer
-             [create-comp div input span button adorn dispatch! get-state]]
+             [create-comp div input span button adorn dispatch! get-state get-value]]
             [respo-ui.core :as ui]
-            [reacher.built-in :refer [comp-space]]))
+            [reacher.built-in :refer [=<]]))
 
-(def comp-draft-area
+(def comp-creator
   (create-comp
-   {:state "draft 0", :name :draft-area}
-   (fn [[p1 p2] state mutate!]
+   {:state "", :name :creator}
+   (fn [[] state mutate!]
      (div
-      {}
+      {:style (adorn ui/row-middle)}
       (input
-       {:value state,
-        :style (adorn ui/input),
-        :onChange (fn [event] (mutate! (.. event -target -value)))})
-      (comp-space 8 nil)
-      (span {} state)
-      (span {} (str p1))
-      (span {} (str p2))))))
+       {:style (adorn ui/input),
+        :placeholder "demo",
+        :value state,
+        :onChange (fn [event] (mutate! (get-value event)))})
+      (=< 8 nil)
+      (button
+       {:style (adorn ui/button), :onClick (fn [] (dispatch! :create nil) (mutate! ""))}
+       "Add")))))
 
-(def comp-input-area
+(def comp-container
   (create-comp
-   {:state "initial thingg",
-    :name :demo-area,
-    :mount (fn [] (this-as this (println "Mounted with state" (pr-str (get-state this))))),
-    :unmount (fn [] (println "Tearing down"))}
-   (fn [_ state mutate!]
-     (div
-      {}
-      (input
-       {:value state,
-        :style (adorn ui/input),
-        :onChange (fn [event] (mutate! (.. event -target -value)))})
-      (comp-space 8 nil)
-      (str state)
-      (button {:onClick (fn [event] (dispatch! :action "data"))} "Click")))))
-
-(defn comp-input-hooked [a b c]
-  (let [[text set-text] (js->clj (React/useState "0"))]
-    (div
-     {}
-     (input
-      {:value text,
-       :style (adorn ui/input),
-       :onChange (fn [event] (set-text (.. event -target -value)))})
-     (span {} text))))
-
-(defn comp-container [store]
-  (div
-   {:style (adorn ui/global {:color (hsl 200 90 60)})}
-   (div {} "A todolist")
-   (div {} "DEMO")
-   (comp-input-area)
-   (comp-draft-area :value 1)
-   (comp-input-hooked 1 2 3)))
+   {:state nil, :name :app-container}
+   (fn [[store] state mutate!]
+     (div {:style (adorn ui/global {:color (hsl 200 90 60)})} (comp-creator)))))

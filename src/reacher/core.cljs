@@ -60,6 +60,8 @@
 
 (defn dispatch! [op op-data] ((.-dispatcherFunction React) op op-data))
 
+(defn get-value [event] (.. event -target -value))
+
 (defn react-create-element [el props & children]
   (apply (partial React/createElement el props) children ))
 

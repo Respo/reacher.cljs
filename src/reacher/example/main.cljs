@@ -9,7 +9,7 @@
             [reacher.example.comp.container :refer [comp-container]]
             [reacher.core :refer [register-dispatcher!]]))
 
-(def *store (atom {}))
+(def *store (atom schema/store))
 
 (defn dispatch! [op op-data] (println "Dispatch:" op op-data))
 
@@ -18,7 +18,7 @@
 (defn persist-storage! []
   (.setItem js/localStorage (:storage config/site) (pr-str @*store)))
 
-(defn render-app! [] (ReactDOM/render (React/createElement comp-container) mount-target))
+(defn render-app! [] (ReactDOM/render (comp-container @*store) mount-target))
 
 (def ssr? (some? (js/document.querySelector "meta.respo-ssr")))
 

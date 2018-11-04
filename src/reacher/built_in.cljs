@@ -8,3 +8,5 @@
      (if (some? w)
        (div {:style (adorn {:display :inline-block, :width w})})
        (div {:style {:height h}})))))
+
+(def =< comp-space)

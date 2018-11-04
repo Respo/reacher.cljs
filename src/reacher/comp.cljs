@@ -5,7 +5,7 @@
 (def comp-space
   (create-comp
    {:name :comp-space}
-   (fn [[w h] state d! m!]
+   (fn [[w h] state mutate!]
      (if (some? w)
        (div {:style (adorn {:display :inline-block, :width w})})
        (div {:style {:height h}})))))

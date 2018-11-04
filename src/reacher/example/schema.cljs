@@ -1,4 +1,6 @@
 
 (ns reacher.example.schema )
 
-(def store {})
+(def store {:tasks {}})
+
+(def task {:id nil, :text "", :time nil, :done? false})

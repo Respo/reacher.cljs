@@ -56,7 +56,10 @@
     (set! (.. ^js Child -prototype -componentDidUpdate) (:update options))
     (set! (.. ^js Child -prototype -componentWillUnmount) (:unmount options))
     (set! (.. ^js Child -displayName) (str (:name options)))
-    (fn [& args] (React/createElement Child (unit-obj args)))))
+    (fn [& args]
+      (let [props (unit-obj args)]
+        (when (fn? (:key-fn options)) (set! (.-key props) (apply (:key-fn options) args)))
+        (React/createElement Child props)))))
 
 (defn dispatch! [op op-data] ((.-dispatcherFunction React) op op-data))
 

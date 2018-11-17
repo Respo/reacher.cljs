@@ -11,7 +11,7 @@ Demo http://repo.respo-mvc.org/reacher/
 [![Clojars Project](https://img.shields.io/clojars/v/respo/reacher.svg)](https://clojars.org/respo/recher)
 
 ```edn
-[respo/reacher "0.1.0"]
+[respo/reacher "0.1.1"]
 ```
 
 Example:

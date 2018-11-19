@@ -8,7 +8,7 @@ Demo http://repo.respo-mvc.org/reacher/
 
 ### Usage
 
-[![Clojars Project](https://img.shields.io/clojars/v/respo/reacher.svg)](https://clojars.org/respo/recher)
+[![Clojars Project](https://img.shields.io/clojars/v/respo/reacher.svg)](https://clojars.org/respo/reacher)
 
 ```edn
 [respo/reacher "0.1.1"]

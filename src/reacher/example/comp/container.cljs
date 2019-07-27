@@ -22,7 +22,7 @@
        :placeholder "task content",
        :value draft,
        :onChange (fn [event] (set-draft! (.. event -target -value)))})
-     (=< 8 nil)
+     (=< (j/obj :w 8))
      (button
       {:style (adorn ui/button),
        :onClick (fn []
@@ -44,7 +44,7 @@
           (let [content (js/prompt "Change content" (:text task))]
             (when (some? content) (dispatch! :update {:id (:id task), :text content}))))}
        "Edit")
-      (=< 8 nil)
+      (=< (j/obj :w 8))
       (a
        {:style (adorn {:cursor :pointer}),
         :onClick (fn []

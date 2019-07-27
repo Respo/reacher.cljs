@@ -19,53 +19,11 @@
 (defn adorn [& styles]
   (->> (apply merge styles) (map (fn [[k v]] [(dashed->camel (name k)) v])) (into {})))
 
-(defn unit-get [x] (aget x "$0"))
-
-(defn get-props [this] (unit-get (.-props this)))
-
-(defn get-state [this] (unit-get (.-state this)))
-
-(defn unit-obj [data] (js-obj "$0" data))
-
-(defn set-state! [this data] (.setState this (unit-obj data)))
-
-(defn create-comp [options renderer]
-  (let [Child (fn [props context updater]
-                (this-as
-                 this
-                 (.call React/Component this props context updater)
-                 (set! (.-state this) (unit-obj (:state options)))
-                 this))]
-    (set! (.-prototype Child) (.create js/Object (.-prototype React/Component)))
-    (set! (.. Child -prototype -constructor) React/Component)
-    (set!
-     (.. ^js Child -prototype -shouldComponentUpdate)
-     (or (:should-update options)
-         (fn [prevProps prevState]
-           (this-as
-            this
-            (or (not= (unit-get prevProps) (get-props this))
-                (not= (unit-get prevState) (get-state this)))))))
-    (set!
-     (.. Child -prototype -render)
-     (fn []
-       (this-as
-        this
-        (renderer (get-props this) (get-state this) (fn [result] (set-state! this result))))))
-    (set! (.. ^js Child -prototype -componentDidMount) (:mount options))
-    (set! (.. ^js Child -prototype -componentDidUpdate) (:update options))
-    (set! (.. ^js Child -prototype -componentWillUnmount) (:unmount options))
-    (set! (.. ^js Child -displayName) (str (:name options)))
-    (fn [& args]
-      (let [props (unit-obj args)]
-        (when (fn? (:key-fn options)) (set! (.-key props) (apply (:key-fn options) args)))
-        (React/createElement Child props)))))
-
-(defn dispatch! [op op-data] ((.-dispatcherFunction React) op op-data))
-
-(defn get-value [event] (.. event -target -value))
+(def dispatch-context (React/createContext "dispatch"))
 
 (defn react-create-element [el props & children]
-  (apply (partial React/createElement el props) children ))
+  (apply (partial React/createElement el props) children))
 
-(defn register-dispatcher! [f] (set! (.-dispatcherFunction React) f))
+(defn use-dispatch [] (React/useContext dispatch-context))
+
+(defn use-rex-data [] )

@@ -2,7 +2,8 @@
 {:source-paths ["macros" "src" "cli"]
  :dependencies [[mvc-works/hsl              "0.1.2"]
                 [respo/ui                   "0.3.13"]
-                [cumulo/util            "0.1.10"]
+                [cumulo/util                "0.1.10"]
+                [appliedscience/js-interop  "0.1.20"]
                 [org.clojure/core.incubator "0.1.4"]]
  :open-file-command ["subl" ["%s:%s:%s" :file :line :column]]
  :dev-http {7000 "target"}

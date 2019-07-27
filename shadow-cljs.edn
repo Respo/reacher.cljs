@@ -1,17 +1,16 @@
 
 {:source-paths ["macros" "src" "cli"]
  :dependencies [[mvc-works/hsl              "0.1.2"]
-                [respo/ui                   "0.3.10"]
+                [respo/ui                   "0.3.13"]
+                [cumulo/util            "0.1.10"]
                 [org.clojure/core.incubator "0.1.4"]]
  :open-file-command ["subl" ["%s:%s:%s" :file :line :column]]
- :socket-repl {:port 0}
+ :dev-http {7000 "target"}
  :builds {:client {:target :browser
                    :output-dir "target/"
                    :asset-path "./"
                    :modules {:client {:init-fn reacher.example.main/main!}}
-                   :devtools {:after-load reacher.example.main/reload!
-                              :http-root "target"
-                              :http-port 7000}
+                   :devtools {:after-load reacher.example.main/reload!}
                    :compiler-options {:infer-externs :auto}
                    :release {:output-dir "dist/"
                              :module-hash-names 8

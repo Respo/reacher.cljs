@@ -3,8 +3,7 @@
   (:require [reacher.example.schema :as schema]
             [cljs.reader :refer [read-string]]
             [reacher.example.config :as config]
-            [reacher.example.util :refer [get-env!]]
-            [build.util :refer [get-ip!]]
+            [cumulo-util.build :refer [get-ip!]]
             ["react-dom/server" :refer [renderToString]]
             ["react" :as React]
             ["fs" :as fs]
@@ -32,13 +31,11 @@
      :scripts ["/client.js"],
      :inline-styles []})))
 
-(def local-bundle? (= "local-bundle" (get-env! "mode")))
-
 (defn slurp [file-path] (fs/readFileSync file-path "utf8"))
 
 (defn prod-page []
   (let [assets (read-string (slurp "dist/assets.edn"))
-        cdn (if local-bundle? "" (:cdn-url config/site))
+        cdn (if config/cdn? "" (:cdn-url config/site))
         prefix-cdn (fn [x] (str cdn x))]
     (make-page
      (merge
@@ -51,6 +48,7 @@
 (defn spit [file-path content] (fs/writeFileSync file-path content))
 
 (defn main! []
-  (if (contains? config/bundle-builds (get-env! "mode"))
-    (spit "dist/index.html" (prod-page))
-    (spit "target/index.html" (dev-page))))
+  (println "Running mode:" (if config/dev? "dev" "release"))
+  (if config/dev?
+    (spit "target/index.html" (dev-page))
+    (spit "dist/index.html" (prod-page))))

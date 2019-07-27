@@ -8,7 +8,8 @@
             ["react-dom" :as ReactDOM]
             [reacher.example.comp.container :refer [comp-container]]
             [reacher.core :refer [register-dispatcher!]]
-            ["shortid" :as shortid]))
+            ["shortid" :as shortid]
+            [cumulo-util.core :refer [repeat!]]))
 
 (defonce *store (atom schema/store))
 
@@ -20,7 +21,7 @@
 (def mount-target (.querySelector js/document ".app"))
 
 (defn persist-storage! []
-  (.setItem js/localStorage (:storage config/site) (pr-str @*store)))
+  (.setItem js/localStorage (:storage-key config/site) (pr-str @*store)))
 
 (defn render-app! [] (ReactDOM/render (comp-container @*store) mount-target))
 
@@ -32,8 +33,8 @@
   (render-app!)
   (add-watch *store :changes (fn [] (render-app!)))
   (.addEventListener js/window "beforeunload" persist-storage!)
-  (js/setInterval persist-storage! (* 1000 60))
-  (let [raw (.getItem js/localStorage (:storage config/site))]
+  (repeat! 60 persist-storage!)
+  (let [raw (.getItem js/localStorage (:storage-key config/site))]
     (when (some? raw) (dispatch! :hydrate-storage (read-string raw))))
   (println "App started."))
 

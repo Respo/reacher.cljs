@@ -4,10 +4,11 @@
             [hsl.core :refer [hsl]]
             [applied-science.js-interop :as j]))
 
-(defn comp-space [w h]
-  (if (some? w)
-    (div {:style (adorn {:display :inline-block, :width w})})
-    (div {:style {:height h}})))
+(defn comp-space [props]
+  (let [w (j/get props :w), h (j/get props :h)]
+    (if (some? w)
+      (div {:style (adorn {:display :inline-block, :width w})})
+      (div {:style {:height h}}))))
 
 (def =< comp-space)
 

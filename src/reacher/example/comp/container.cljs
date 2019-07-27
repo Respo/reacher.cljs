@@ -12,8 +12,8 @@
             [reacher.core :refer [use-dispatch]]))
 
 (defn comp-creator []
-  (comment println (.. js/document (querySelector ".box") (focus)))
   (let [[draft set-draft!] (React/useState ""), dispatch! (use-dispatch)]
+    (React/useEffect (fn [] (.. js/document (querySelector ".box") (focus))) (array))
     (div
      {:style (adorn ui/row-middle)}
      (input

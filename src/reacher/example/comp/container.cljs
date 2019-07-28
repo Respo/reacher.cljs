@@ -5,7 +5,7 @@
             [reacher.example.config :refer [dev?]]
             ["react" :as React]
             ["react-dom" :as ReactDOM]
-            [reacher.core :refer [div input span button a adorn]]
+            [reacher.core :refer [div input span button a]]
             [respo-ui.core :as ui]
             [reacher.comp :refer [=< comp-inspect]]
             [applied-science.js-interop :as j]
@@ -15,16 +15,16 @@
   (let [[draft set-draft!] (React/useState ""), dispatch! (use-dispatch)]
     (React/useEffect (fn [] (.. js/document (querySelector ".box") (focus))) (array))
     (div
-     {:style (adorn ui/row-middle)}
+     {:style ui/row-middle}
      (input
       {:className "box",
-       :style (adorn ui/input),
+       :style ui/input,
        :placeholder "task content",
        :value draft,
        :onChange (fn [event] (set-draft! (.. event -target -value)))})
      (=< (j/obj :w 8))
      (button
-      {:style (adorn ui/button),
+      {:style ui/button,
        :onClick (fn []
          (when (not (string/blank? draft)) (dispatch! :create draft) (set-draft! "")))}
       "Add"))))
@@ -32,21 +32,21 @@
 (defn comp-task [props]
   (let [task (j/get props :task), dispatch! (use-dispatch)]
     (div
-     {:key (:id task), :style (adorn ui/row-parted {:padding "0 8px", :width 320})}
+     {:key (:id task), :style (merge ui/row-parted {:padding "0 8px", :width 320})}
      (str (:text task))
      (div
-      {:style (adorn
+      {:style (merge
                ui/row-middle
                {:color (hsl 200 40 50), :font-size 12, :font-family ui/font-fancy})}
       (a
-       {:style (adorn {:cursor :pointer}),
+       {:style (merge {:cursor :pointer}),
         :onClick (fn []
           (let [content (js/prompt "Change content" (:text task))]
             (when (some? content) (dispatch! :update {:id (:id task), :text content}))))}
        "Edit")
       (=< (j/obj :w 8))
       (a
-       {:style (adorn {:cursor :pointer}),
+       {:style (merge {:cursor :pointer}),
         :onClick (fn []
           (let [sure? (js/confirm "Remove it?")] (when sure? (dispatch! :remove (:id task)))))}
        "Remove")))))
@@ -66,7 +66,7 @@
 (defn comp-container [props]
   (let [store (j/get props :store)]
     (div
-     {:style (adorn ui/global {})}
+     {:style ui/global}
      (React/createElement comp-creator)
      (React/createElement comp-tasks-list (j/obj :tasks (:tasks store)))
      (React/createElement comp-inspect (j/obj :store store :text store)))))

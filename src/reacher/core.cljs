@@ -1,6 +1,9 @@
 
 (ns reacher.core
-  (:require ["react" :as React] ["react-dom" :as DOM] [clojure.string :as string])
+  (:require ["react" :as React]
+            ["react-dom" :as DOM]
+            [clojure.string :as string]
+            [medley.core :as medley])
   (:require-macros [reacher.core :refer [div]]))
 
 (defn dashed->camel
@@ -16,13 +19,17 @@
           piece-followed
           false))))))
 
-(defn adorn [& styles]
-  (->> (apply merge styles) (map (fn [[k v]] [(dashed->camel (name k)) v])) (into {})))
-
 (def dispatch-context (React/createContext "dispatch"))
+
+(defn map-upper-case [m]
+  (->> m (medley/map-keys (fn [k] (keyword (dashed->camel (name k)))))))
 
 (defn react-create-element [el props & children]
   (apply (partial React/createElement el props) children))
+
+(defn transform-props [props]
+  (let [result (-> (map-upper-case props) (update :style map-upper-case))]
+    (cljs.core/clj->js result)))
 
 (defn use-dispatch [] (React/useContext dispatch-context))
 

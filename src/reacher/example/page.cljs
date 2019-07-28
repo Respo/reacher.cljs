@@ -21,7 +21,7 @@
     (body
      {}
      (div {:className "app"})
-     (clj->js (map (fn [src] (script {:src src, :key src})) (:scripts info)))))))
+     (array (map (fn [src] (script {:src src, :key src})) (:scripts info)))))))
 
 (defn dev-page []
   (make-page

@@ -9,10 +9,12 @@
             [respo-ui.core :as ui]
             [reacher.comp :refer [=< comp-inspect]]
             [applied-science.js-interop :as j]
-            [reacher.core :refer [use-dispatch]]))
+            [reacher.core :refer [use-dispatch use-states]]))
 
 (defn comp-creator []
-  (let [[draft set-draft!] (React/useState ""), dispatch! (use-dispatch)]
+  (let [[draft set-draft!] (React/useState "")
+        [states update-states!] (use-states {:draft ""})
+        dispatch! (use-dispatch)]
     (React/useEffect (fn [] (.. js/document (querySelector ".box") (focus))) (array))
     (div
      {:style ui/row-middle}
@@ -20,13 +22,16 @@
       {:class-name "box",
        :style ui/input,
        :placeholder "task content",
-       :value draft,
-       :on-change (fn [event] (set-draft! (.. event -target -value)))})
+       :value (:draft states),
+       :on-change (fn [event]
+         (update-states! (fn [s] (assoc s :draft (.. event -target -value)))))})
      (=< (j/obj :w 8))
      (button
       {:style ui/button,
        :on-click (fn []
-         (when (not (string/blank? draft)) (dispatch! :create draft) (set-draft! "")))}
+         (when (not (string/blank? (:draft states)))
+           (dispatch! :create (:draft states))
+           (update-states! (fn [s] (assoc s :draft "")))))}
       "Add"))))
 
 (defn comp-task [props]

@@ -17,15 +17,15 @@
     (div
      {:style ui/row-middle}
      (input
-      {:className "box",
+      {:class-name "box",
        :style ui/input,
        :placeholder "task content",
        :value draft,
-       :onChange (fn [event] (set-draft! (.. event -target -value)))})
+       :on-change (fn [event] (set-draft! (.. event -target -value)))})
      (=< (j/obj :w 8))
      (button
       {:style ui/button,
-       :onClick (fn []
+       :on-click (fn []
          (when (not (string/blank? draft)) (dispatch! :create draft) (set-draft! "")))}
       "Add"))))
 
@@ -40,14 +40,14 @@
                {:color (hsl 200 40 50), :font-size 12, :font-family ui/font-fancy})}
       (a
        {:style (merge {:cursor :pointer}),
-        :onClick (fn []
+        :on-click (fn []
           (let [content (js/prompt "Change content" (:text task))]
             (when (some? content) (dispatch! :update {:id (:id task), :text content}))))}
        "Edit")
       (=< (j/obj :w 8))
       (a
        {:style (merge {:cursor :pointer}),
-        :onClick (fn []
+        :on-click (fn []
           (let [sure? (js/confirm "Remove it?")] (when sure? (dispatch! :remove (:id task)))))}
        "Remove")))))
 

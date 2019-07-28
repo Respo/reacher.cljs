@@ -211,7 +211,7 @@
              "r" {
               :type :expr, :by "root", :at 1541310893691, :id "wy4CXyRfI"
               :data {
-               "T" {:type :leaf, :by "root", :at 1541310895214, :text ":onClick", :id "wy4CXyRfIleaf"}
+               "T" {:type :leaf, :by "rJG4IHzWf", :at 1564297923595, :text ":on-click", :id "wy4CXyRfIleaf"}
                "j" {
                 :type :expr, :by "root", :at 1541310895531, :id "BErpLOwo4"
                 :data {
@@ -1178,7 +1178,7 @@
                "b" {
                 :type :expr, :by "root", :at 1541312717271, :id "2zvU4lmE-y"
                 :data {
-                 "T" {:type :leaf, :by "root", :at 1541312721354, :text ":className", :id "2zvU4lmE-yleaf"}
+                 "T" {:type :leaf, :by "rJG4IHzWf", :at 1564297876699, :text ":class-name", :id "2zvU4lmE-yleaf"}
                  "j" {:type :leaf, :by "root", :at 1541312725120, :text "\"box", :id "hb4ZhzQbN"}
                 }
                }
@@ -1206,7 +1206,7 @@
                "x" {
                 :type :expr, :by "root", :at 1541310069152, :id "O_ggyyd73Q"
                 :data {
-                 "T" {:type :leaf, :by "root", :at 1541310071409, :text ":onChange", :id "O_ggyyd73Qleaf"}
+                 "T" {:type :leaf, :by "rJG4IHzWf", :at 1564297879423, :text ":on-change", :id "O_ggyyd73Qleaf"}
                  "j" {
                   :type :expr, :by "root", :at 1541310071714, :id "RCyHsls0AD"
                   :data {
@@ -1272,7 +1272,7 @@
                "r" {
                 :type :expr, :by "root", :at 1541310035106, :id "vlvRHQYXTz"
                 :data {
-                 "T" {:type :leaf, :by "root", :at 1541310039682, :text ":onClick", :id "vlvRHQYXTzleaf"}
+                 "T" {:type :leaf, :by "rJG4IHzWf", :at 1564297883582, :text ":on-click", :id "vlvRHQYXTzleaf"}
                  "j" {
                   :type :expr, :by "root", :at 1541310040233, :id "Wfk-8j6z2Q"
                   :data {
@@ -1539,7 +1539,7 @@
                  "r" {
                   :type :expr, :by "root", :at 1541312571507, :id "I94Q_-ACui"
                   :data {
-                   "T" {:type :leaf, :by "root", :at 1541312571507, :text ":onClick", :id "WG6iORxV6S"}
+                   "T" {:type :leaf, :by "rJG4IHzWf", :at 1564297898511, :text ":on-click", :id "WG6iORxV6S"}
                    "j" {
                     :type :expr, :by "root", :at 1541312571507, :id "gNLufT7Ydx"
                     :data {
@@ -1684,7 +1684,7 @@
                  "r" {
                   :type :expr, :by "root", :at 1541312150467, :id "Vg1W_PNctrT"
                   :data {
-                   "T" {:type :leaf, :by "root", :at 1541312150467, :text ":onClick", :id "uEljPD_kPxI"}
+                   "T" {:type :leaf, :by "rJG4IHzWf", :at 1564297904755, :text ":on-click", :id "uEljPD_kPxI"}
                    "j" {
                     :type :expr, :by "root", :at 1541312150467, :id "S2WZYVGhl7O"
                     :data {

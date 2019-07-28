@@ -24,5 +24,5 @@
               :line-height "20px",
               :border-radius "6px",
               :cursor :pointer},
-      :onClick (fn [] (println title "value:" (pr-str data)))}
+      :on-click (fn [] (println title "value:" (pr-str data)))}
      (or title (pr-str data)))))

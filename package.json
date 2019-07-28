@@ -10,7 +10,6 @@
     "build-cdn": "shadow-cljs clj-run build.main/build-cdn",
     "build": "shadow-cljs clj-run build.main/build",
     "page": "shadow-cljs clj-run build.main/page",
-    "upload": "lumo -c cli/:src/ -m build.upload",
     "up": "yarn build-cdn && tiye-up",
     "ln": "cd target && rm -f entry && ln -s ../entry"
   },

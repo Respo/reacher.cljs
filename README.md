@@ -13,7 +13,7 @@ Demo http://repo.respo-mvc.org/reacher/
 [![Clojars Project](https://img.shields.io/clojars/v/respo/reacher.svg)](https://clojars.org/respo/reacher)
 
 ```edn
-[respo/reacher "0.1.1"]
+[respo/reacher "0.2.0"]
 ```
 
 Example:
@@ -22,36 +22,42 @@ Example:
 (defn comp-space [props]
   (let [w (j/get props :w), h (j/get props :h)]
     (if (some? w)
-      (div {:style (adorn {:display :inline-block, :width w})})
+      (div {:style {:display :inline-block, :width w}})
       (div {:style {:height h}}))))
 
 (defn comp-creator []
-  (let [[draft set-draft!] (React/useState ""), dispatch! (use-dispatch)]
+  (let [[draft set-draft!] (React/useState "")
+        [states update-states!] (use-states {:draft ""})
+        dispatch! (use-dispatch)]
     (React/useEffect (fn [] (.. js/document (querySelector ".box") (focus))) (array))
     (div
-     {:style (adorn ui/row-middle)}
+     {:style ui/row-middle}
      (input
-      {:className "box",
-       :style (adorn ui/input),
+      {:class-name "box",
+       :style ui/input,
        :placeholder "task content",
-       :value draft,
-       :onChange (fn [event] (set-draft! (.. event -target -value)))})
-     (=< 8 nil)
+       :value (:draft states),
+       :on-change (fn [event]
+         (update-states! (fn [s] (assoc s :draft (.. event -target -value)))))})
+     (=< (j/obj :w 8))
      (button
-      {:style (adorn ui/button),
-       :onClick (fn []
-         (when (not (string/blank? draft)) (dispatch! :create draft) (set-draft! "")))}
+      {:style ui/button,
+       :on-click (fn []
+         (when (not (string/blank? (:draft states)))
+           (dispatch! :create (:draft states))
+           (update-states! (fn [s] (assoc s :draft "")))))}
       "Add"))))
 ```
 
 Public APIs:
 
 ```clojure
-reacher.core/adorn
-
 reacher.core/div
 reacher.core/span ; and more
 reacher.core/tag*
+
+reacher.core/use-dispatch
+reacher.core/use-states
 ```
 
 ### Workflow

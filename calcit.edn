@@ -799,17 +799,6 @@
        }
       }
      }
-     "use-rex-data" {
-      :type :expr, :by "rJG4IHzWf", :at 1564246356816, :id "H8uyR6SOS0"
-      :data {
-       "T" {:type :leaf, :by "rJG4IHzWf", :at 1564246356816, :text "defn", :id "S1mF8twJgs"}
-       "j" {:type :leaf, :by "rJG4IHzWf", :at 1564246356816, :text "use-rex-data", :id "qxkI8w55Bu"}
-       "r" {
-        :type :expr, :by "rJG4IHzWf", :at 1564246356816, :id "OBcRYnVDNi"
-        :data {}
-       }
-      }
-     }
      "use-states" {
       :type :expr, :by "rJG4IHzWf", :at 1564303874936, :id "z1RhvVRGvv"
       :data {

@@ -33,8 +33,6 @@
 
 (defn use-dispatch [] (React/useContext dispatch-context))
 
-(defn use-rex-data [] )
-
 (defn use-states [s0]
   (let [[state set-state!] (React/useState s0), update-state! (fn [f] (set-state! (f state)))]
     [state update-state!]))

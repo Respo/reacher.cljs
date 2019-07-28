@@ -17,11 +17,11 @@
   (renderToString
    (html
     {}
-    (head {} (title {:title info}) (meta' {:charSet "utf8"}))
+    (head {} (title {} (:title info)) (meta' {:charSet "utf8"}))
     (body
      {}
      (div {:className "app"})
-     (clj->js (map (fn [src] (script {:src src, :key src})) (:scripts info)))))))
+     (array (map (fn [src] (script {:src src, :key src})) (:scripts info)))))))
 
 (defn dev-page []
   (make-page
@@ -35,7 +35,7 @@
 
 (defn prod-page []
   (let [assets (read-string (slurp "dist/assets.edn"))
-        cdn (if config/cdn? "" (:cdn-url config/site))
+        cdn (if config/cdn? (:cdn-url config/site) "")
         prefix-cdn (fn [x] (str cdn x))]
     (make-page
      (merge

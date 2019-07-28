@@ -10,12 +10,12 @@
 
 (defmacro tag* [tag props & children]
   (let [tag-name (get-tag-name tag)]
-    `(react-create-element ~(get-tag-name tag-name) (cljs.core/clj->js ~props) ~@children)))
+    `(react-create-element ~(get-tag-name tag-name) (reacher.core/transform-props ~props) ~@children)))
 
 (defmacro meta' [props & children]
-  `(react-create-element "meta" (cljs.core/clj->js ~props) ~@children))
+  `(react-create-element "meta" (reacher.core/transform-props ~props) ~@children))
 (defmacro filter' [props & children]
-  `(react-create-element "filter" (cljs.core/clj->js ~props) ~@children))
+  `(react-create-element "filter" (reacher.core/transform-props ~props) ~@children))
 
 (def normal-elements '[a body button canvas code div footer
                        h1 h2 head header html hr i img li
@@ -29,7 +29,7 @@
                        clipPath feBlend feOffset])
 
 (defn create-normal-element [tag props children]
-  `(react-create-element ~(get-tag-name tag) (cljs.core/clj->js ~props) ~@children))
+  `(react-create-element ~(get-tag-name tag) (reacher.core/transform-props ~props) ~@children))
 
 (defn normal-tag [el]
   `(defmacro ~el [~'props ~'& ~'children]

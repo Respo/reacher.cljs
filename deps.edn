@@ -1,2 +1,4 @@
 
-{:paths ["src" "macros"]}
+{:paths ["src" "macros"]
+ :deps {appliedscience/js-interop {:mvn/version "0.1.20"}
+        medley {:mvn/version "1.2.0"}}}

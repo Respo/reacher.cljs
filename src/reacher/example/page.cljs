@@ -17,11 +17,11 @@
   (renderToString
    (html
     {}
-    (head {} (title {} (:title info)) (meta' {:charSet "utf8"}))
+    (head {} (title {} (:title info)) (meta' {:char-set "utf8"}))
     (body
      {}
-     (div {:className "app"})
-     (array (map (fn [src] (script {:src src, :key src})) (:scripts info)))))))
+     (div {:class-name "app"})
+     (apply array (map (fn [src] (script {:src src, :key src})) (:scripts info)))))))
 
 (defn dev-page []
   (make-page

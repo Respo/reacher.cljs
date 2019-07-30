@@ -58,6 +58,7 @@ reacher.core/tag*
 
 reacher.core/use-dispatch
 reacher.core/use-states
+reacher.core/use-atom
 ```
 
 ### Workflow

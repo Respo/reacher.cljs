@@ -10,8 +10,7 @@
             [reacher.core :refer [div html head body link style script title meta']])
   (:require-macros [clojure.core.strint :refer [<<]]))
 
-(def base-info
-  {:title (:title config/site), :icon (:icon config/site), :ssr nil, :inline-html nil})
+(def base-info {:title (:title config/site), :icon (:icon config/site), :inline-html nil})
 
 (defn make-page [info]
   (renderToString
@@ -21,7 +20,8 @@
     (body
      {}
      (div {:class-name "app"})
-     (apply array (map (fn [src] (script {:src src, :key src})) (:scripts info)))))))
+     (div {:class-name "meson-modal-container"})
+     (->> (:scripts info) (map (fn [src] (script {:src src, :key src}))) (apply array))))))
 
 (defn dev-page []
   (make-page
@@ -42,7 +42,6 @@
       base-info
       {:styles [(:release-ui config/site)],
        :scripts (map #(-> % :output-name prefix-cdn) assets),
-       :ssr "respo-ssr",
        :inline-styles [(slurp "./entry/main.css")]}))))
 
 (defn spit [file-path content] (fs/writeFileSync file-path content))

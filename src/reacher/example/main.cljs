@@ -32,10 +32,7 @@
     (comp-container (j/obj :store @*store)))
    mount-target))
 
-(def ssr? (some? (js/document.querySelector "meta.respo-ssr")))
-
 (defn main! []
-  (if ssr? (do nil))
   (render-app!)
   (add-watch *store :changes (fn [] (render-app!)))
   (.addEventListener js/window "beforeunload" persist-storage!)

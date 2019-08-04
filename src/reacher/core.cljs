@@ -46,7 +46,11 @@
     (use-effect! [] (fn [] (fn [] (remove-watch (j/get ref-atom :current) :changes))))
     (j/get ref-atom :current)))
 
+(defn use-callback [params f] (React/useCallback f (apply array params)))
+
 (defn use-dispatch [] (React/useContext dispatch-context))
+
+(defn use-memo [params f] (React/useMemo f (apply array params)))
 
 (defn use-states [s0]
   (let [[state set-state!] (React/useState s0), update-state! (fn [f] (set-state! (f state)))]

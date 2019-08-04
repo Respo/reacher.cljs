@@ -13,7 +13,7 @@ Demo http://repo.respo-mvc.org/reacher/
 [![Clojars Project](https://img.shields.io/clojars/v/respo/reacher.svg)](https://clojars.org/respo/reacher)
 
 ```edn
-[respo/reacher "0.2.0"]
+[respo/reacher "0.3.0-a1"]
 ```
 
 Example:
@@ -56,9 +56,13 @@ reacher.core/div
 reacher.core/span ; and more
 reacher.core/tag*
 
+reacher.core/defcomp
+
 reacher.core/use-dispatch
 reacher.core/use-states
 reacher.core/use-atom
+reacher.core/use-memo
+reacher.core/use-callback
 ```
 
 ### Workflow

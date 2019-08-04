@@ -39,3 +39,10 @@
   `(do ~@(clojure.core/map normal-tag normal-elements)))
 
 (gen-normal-elements)
+
+(defmacro defcomp [def-name params & body]
+  (let [func-name (symbol (str "$comp_" (name def-name)))]
+  `(do
+    (defn- ~func-name [~@params] ~@body)
+    (defn ~def-name [& args#]
+      (apply react-create-element ~func-name args#)))))

@@ -58,13 +58,11 @@
   (let [tasks (j/get props :tasks)]
     (div
      {}
-     (apply
-      array
-      (->> tasks
-           (sort-by (fn [[k task]] (unchecked-negate (:time task))))
-           (map
-            (fn [[k task]]
-              (React/createElement comp-task (j/obj :task task :key (:id task))))))))))
+     (->> tasks
+          (sort-by (fn [[k task]] (unchecked-negate (:time task))))
+          (map
+           (fn [[k task]]
+             (React/createElement comp-task (j/obj :task task :key (:id task)))))))))
 
 (defn comp-container [props]
   (let [store (j/get props :store)]

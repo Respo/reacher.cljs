@@ -25,8 +25,7 @@
 (defn map-upper-case [m]
   (->> m (medley/map-keys (fn [k] (keyword (dashed->camel (name k)))))))
 
-(defn react-create-element [el props & children]
-  (apply (partial React/createElement el props) children))
+(def react-create-element React/createElement)
 
 (defn transform-props [props]
   (let [result (-> (map-upper-case props) (update :style map-upper-case))]

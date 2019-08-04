@@ -66,7 +66,8 @@
     {}
     (->> tasks
          (sort-by (fn [[k task]] (unchecked-negate (:time task))))
-         (map (fn [[k task]] (comp-task (j/obj :task task :key (:id task)))))))))
+         (map (fn [[k task]] (comp-task (j/obj :task task :key (:id task)))))
+         (apply array)))))
 
 (defn comp-container [props]
   (let [store (j/get props :store)]

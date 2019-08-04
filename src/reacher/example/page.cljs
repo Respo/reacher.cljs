@@ -21,7 +21,7 @@
      {}
      (div {:class-name "app"})
      (div {:class-name "meson-modal-container"})
-     (->> (:scripts info) (map (fn [src] (script {:src src, :key src}))))))))
+     (->> (:scripts info) (map (fn [src] (script {:src src, :key src}))) (apply array))))))
 
 (defn dev-page []
   (make-page

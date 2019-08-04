@@ -25,8 +25,7 @@
 (defn map-upper-case [m]
   (->> m (medley/map-keys (fn [k] (keyword (dashed->camel (name k)))))))
 
-(defn react-create-element [el props & children]
-  (apply (partial React/createElement el props) children))
+(def react-create-element React/createElement)
 
 (defn transform-props [props]
   (let [result (-> (map-upper-case props) (update :style map-upper-case))]
@@ -47,7 +46,11 @@
     (use-effect! [] (fn [] (fn [] (remove-watch (j/get ref-atom :current) :changes))))
     (j/get ref-atom :current)))
 
+(defn use-callback [params f] (React/useCallback f (apply array params)))
+
 (defn use-dispatch [] (React/useContext dispatch-context))
+
+(defn use-memo [params f] (React/useMemo f (apply array params)))
 
 (defn use-states [s0]
   (let [[state set-state!] (React/useState s0), update-state! (fn [f] (set-state! (f state)))]

@@ -1,5 +1,6 @@
 
 {:source-paths ["macros" "src" "cli"]
+ :cache-blockers #{cumulo-util.build}
  :dependencies [[mvc-works/hsl              "0.1.2"]
                 [respo/ui                   "0.3.13"]
                 [cumulo/util                "0.1.10"]

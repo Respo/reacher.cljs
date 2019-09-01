@@ -38,6 +38,7 @@
  comp-task
  (props)
  (let [task (j/get props :task), dispatch! (use-dispatch)]
+   (comment println "rendering task" task)
    (div
     {:key (:id task), :style (merge ui/row-parted {:padding "0 8px", :width 320})}
     (str (:text task))

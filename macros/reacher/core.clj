@@ -43,6 +43,6 @@
 (defmacro defcomp [def-name params & body]
   (let [func-name (symbol (str "$comp_" (name def-name)))]
   `(do
-    (defn- ~func-name [~@params] ~@body)
+    (def ~func-name (reacher.core/react-memo (fn [~@params] ~@body)))
     (defn ~def-name [& args#]
       (apply react-create-element ~func-name args#)))))

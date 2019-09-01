@@ -4,8 +4,15 @@
             ["react-dom" :as DOM]
             [clojure.string :as string]
             [medley.core :as medley]
-            [applied-science.js-interop :as j])
+            [applied-science.js-interop :as j]
+            [clojure.set :as set])
   (:require-macros [reacher.core :refer [div]]))
+
+(defn- compare-props [prev-props next-props]
+  (let [prev-keys (set (js->clj (js/Object.keys prev-props)))
+        next-keys (set (js->clj (js/Object.keys next-props)))]
+    (->> (set/union prev-keys next-keys)
+         (every? (fn [x] (= (j/get prev-props x) (j/get next-props x)))))))
 
 (defn dashed->camel
   ([x] (dashed->camel "" x false))
@@ -26,6 +33,8 @@
   (->> m (medley/map-keys (fn [k] (keyword (dashed->camel (name k)))))))
 
 (def react-create-element React/createElement)
+
+(defn react-memo [comp] (React/memo comp compare-props))
 
 (defn transform-props [props]
   (let [result (-> (map-upper-case props) (update :style map-upper-case))]

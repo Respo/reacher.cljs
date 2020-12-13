@@ -1,0 +1,6 @@
+{:version "0.3.0"
+ :group-id "respo"
+ :artifact-id "reacher"
+ :skip-tag true
+ :description "Very simple React.js binding in ClojureScript"
+ :scm-url "https://github.com/Respo/reacher"}

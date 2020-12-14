@@ -1,9 +1,0 @@
-
-{:pom {:group-id "respo",
-       :artifact-id "reacher",
-       :version "0.3.0",
-       :name "Very simple React.js binding in ClojureScript"}
- :packaging {:jar {:enabled true
-                   :remote-repository {:id "clojars"
-                                       :url "https://clojars.org/repo"}}}
- :scm {:enabled true}}
